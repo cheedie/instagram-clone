@@ -1,5 +1,5 @@
 import React from "react";
-
+import { FaFacebook } from 'react-icons/fa';
 
 const Login = () => {
   return (
@@ -7,7 +7,7 @@ const Login = () => {
         <GlobalStyle />
         <StyledFormWrapper>
             <StyledForm>
-                <img src="assets/" alt="Instagram logo" />
+                <img src="../assets/Login_Logo.svg" alt="Instagram logo" />
                 <input type="email or number" placeholder="Phone number or Email address" />
                 <input type="text" placeholder="Full name" />
                 <input type="text" placeholder="Username" />
@@ -15,7 +15,7 @@ const Login = () => {
                 <StyledButton>Sign up</StyledButton>
                 <StyledText>Forgot your login details? Get help logging in.</StyledText>
                 <h3><span>Or</span></h3>
-                {/* <FaFacebookSquared /> */}
+                <FaFacebook />
                 <StyledButton>Continue with Facebook</StyledButton>
                 <StyledText>Dont have an account?  Sign up.</StyledText>
             </StyledForm>
