@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ig from "../assets/topNavAssets/ig.svg";
 import { signUpData } from "../data/signupData";
 import Button from "../components/Button";
+import { FacebookIcon } from "../assets/topNavAssets";
 
 const Form = () => {
   const navigate = useNavigate();
@@ -39,7 +40,30 @@ const Form = () => {
   const regex = /^\d/gi;
   return (
     <Wrapper>
-      <Logo src={ig} alt="instagram logo" />
+      <div className="sign-up-container">
+        <div
+          style={{
+            display: "flex",
+
+            justifyContent: "center",
+          }}
+        >
+          <img src={ig} alt="instagram logo" className="logo" />
+        </div>
+        <button>
+          <span>
+            <FacebookIcon />
+          </span>
+          <p>Continue with Facebook</p>
+        </button>
+        <span className="hr-line">
+          <span className="line"></span>
+          <p>OR</p>
+          <span className="line"></span>
+        </span>
+      </div>
+
+      {/* <Logo src={ig} alt="instagram logo" />
       <Button title="Continue with facebook" dark />
       <FormWrapper>
         <legend>
@@ -115,28 +139,58 @@ const Form = () => {
           Have an account?
           <Link to="/signin"> Sign in </Link>
         </Text>
-      </TextWrapper>
+      </TextWrapper> */}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  width: 375px;
-  max-width: 375px;
-  /* height: 100%;
-  max-height: 812px; */
+  height: 100vh;
+  width: 100%;
+  display: flex;
   background: #ffffff;
-  display: grid;
-  /* padding:10px; */
-  grid-template-columns: 328px;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  gap: 50px;
+  border: none;
+  
+  .logo {
+      width: 15rem;
+      
+  }
+  .sign-up-container {
+    width: 90vw;
+    margin: 5rem auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  .sign-up-container button {
+    background: #1a83f3;
+    border-radius: 3px;
+    color: #fff;
+    border: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    cursor: pointer;
+  }
+  .hr-line {
+    display: grid;
+    gap: 1rem;
+  }
+  .line {
+    width: 20rem;
+    height: 10rem
+    border-bottom: 1px solid #0000;
+  }
 
-  /* @media (max-width: 768px) {
-    background: black;
-  } */
+  @media (min-width: 800px) {
+    height: 1000px;
+    width: 30vw;
+    margin: 5rem auto 0 auto;
+    border: 1.5px solid rgba(0, 0, 0, 0.3);
+  }
 `;
 
 const FormWrapper = styled.form`
