@@ -5,18 +5,61 @@ import ig from "../assets/topNavAssets/ig.svg";
 import { signUpData } from "../data/signupData";
 import Button from "../components/Button"
 
+
+const work = () =>{
+
+}
 const Form = () => {
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [name, setName] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [isEmail, setPhoneEmail] = useState ("");
+    // const check = (phoneOrEmail) => /^\d/gi.test(phoneOrEmail)
+    const regex = /^\d/gi;
   return <Wrapper>
       <Logo src={ig} alt="instagram logo"/>
       <Button title = "Continue with facebook" />
       <FormWrapper>
-        {signUpData.map((data)=>
+          <legend>
+
             <InputWrapper>
-                <Input name={data.name} type={data.type}/>
+            <Label htmlFor="phone"> Phone number or email address </Label>
+                <Input name={"phone"} type="number" value={phone}
+                onChange={(e) => setPhone(e.target.value)}/>
             </InputWrapper>
-        )}
+            <InputWrapper>
+            <Label htmlFor="name"> Fullname </Label>
+                <Input name="name" type="text" value={name}
+                onChange={(e) => setName(e.target.value)}/>
+            </InputWrapper>
+            <InputWrapper>
+            <Label htmlFor="username"> Username </Label>
+                <Input name="username" type="text" value={username}
+                onChange={(e) => setUsername(e.target.value)}/>
+            </InputWrapper>
+            <InputWrapper>
+            <Label htmlFor="password"> Password </Label>
+                <Input name="password" type="password" value={password}
+                onChange={(e) => setPassword(e.target.value)}/>
+            </InputWrapper>
+
+        </legend>
     </FormWrapper>
     <Button title = "Sign up" />
+    <TextWrapper>
+        <Text>By clicking on Sign up, 
+            you are agreeing to the <br/>
+            <Link to="/">Terms of Service</Link> and 
+            <Link to="/"> Privacy Policy</Link>
+        </Text>
+    </TextWrapper>
+    <TextWrapper>
+        <Text>Have an account? 
+            <Link to="/"> Sign in </Link> 
+        </Text>
+    </TextWrapper>
 
   </Wrapper>;
 };
@@ -47,6 +90,10 @@ const InputWrapper = styled.div`
   height: 50px;
 `
 
+const Label = styled.label`
+cursor:pointer;
+`
+
 const Input = styled.input`
 display:block;
 width:328px;
@@ -60,4 +107,29 @@ const Logo = styled.img`
     width:220px;
     height:74px;
     margin:30px 0px;
+`
+
+const TextWrapper = styled.div`
+width:277px;
+display:flex;
+justify-content:center;
+align-items:center;
+
+`
+
+const Text = styled.p`
+width:277px;
+font-family: Poppins;
+font-style: normal;
+font-weight: normal;
+font-size: 12px;
+line-height: 18px;
+letter-spacing: -0.078px;
+text-align:center;
+color: rgba(60, 60, 67, 0.6);
+
+    a{
+        color:black;
+        font-weight:bold;
+    }
 `
