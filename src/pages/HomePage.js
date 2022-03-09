@@ -3,7 +3,9 @@ import BottomNavBar from "../components/BottomNavbar";
 import TopNavBar from "../components/TopNavBar";
 import styled from "styled-components";
 import Sidebar from "../components/Sidebar";
+import StoriesSection from "../components/StoriesSection";
 import ProfilePic from "../assets/feed-profile-pic.png";
+
 import {
   Line,
   LikeBtn,
@@ -16,6 +18,7 @@ const HomePage = () => {
   return (
     <>
       <TopNavBar />
+      <StoriesSection />
       <Wrapper>
         <div className="home-page-container">
           {/* card */}
@@ -150,5 +153,6 @@ const Wrapper = styled.section`
     }
   }
 `;
+
 
 export default HomePage;
