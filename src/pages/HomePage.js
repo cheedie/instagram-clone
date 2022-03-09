@@ -53,7 +53,7 @@ const HomePage = () => {
           <span style={{ padding: "0 1rem" }}>1 Like</span>
           <div className="caption">
             <h2 className="name">john williams</h2>
-            <p style={{ fontSize: "1.5rem", fontWeight: "light" }}>
+            <p style={{ fontSize: "1.2rem", fontWeight: "light" }}>
               interior deco by yours truly
             </p>
           </div>
@@ -121,13 +121,13 @@ const Wrapper = styled.section`
   }
   .caption {
     display: flex;
-    gap: 1rem;
+    gap: 0.6rem;
     align-item: center;
     padding: 0 1rem;
   }
   .name {
     color: #000000;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 600;
   }
   @media (min-width: 800px) {

@@ -18,7 +18,7 @@ const Form = () => {
   const [password, setPassword] = useState("");
 
   const uploadFields = () => {
-    if (/\S+@\S+\.\S+/.test(email)) {
+    if (!/\S+@\S+\.\S+/.test(email)) {
       M.toast({ html: "invalid email", classes: "#c62828 red darken-3" });
       return;
     }
@@ -147,7 +147,7 @@ const Wrapper = styled.div`
     cursor: pointer;
   }
   .line {
-padding: 0 3em;
+   padding: 0 3em;
     text-align: center;
     border-bottom: 1px solid #2e2a2a49;
     line-height: 0.1em;

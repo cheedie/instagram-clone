@@ -17,19 +17,21 @@ const Routing = () => {
     dispatch,
   } = useContext(UserContext);
 
-  useEffect(
-    () => {
-      const user = JSON.parse(localStorage.getItem("user"));
-      setTimeout(() => {
-        if (user) {
-          dispatch({ type: "USER", payload: user });
-        } else {
-          navigate("/signup");
-        }
-      }, 3000);
+  const getUser = () => {
+    const user = localStorage.getItem("user");
+    console.log(user);
+
+    if (user) {
+      dispatch({ type: "USER", payload: user });
+    } else {
+      navigate("/signup");
     }
-    // []
-  );
+  };
+
+  useEffect(() => {
+    getUser();
+    // eslint-disable-next-line
+  }, []);
   return (
     <Routes>
       <Route path="/" exact={true} element={<SplashScreen />}></Route>

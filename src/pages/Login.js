@@ -27,39 +27,31 @@ const Login = () => {
   const [email, setEmail] = useState("");
 
   const userLogin = () => {
-    if (/\S+@\S+\.\S+/.test(email)) {
+    if (!/\S+@\S+\.\S+/.test(email)) {
       M.toast({ html: "invalid email", classes: "#c62828 red darken-3" });
       return;
     }
-    fetch("https://teamone-ig-clone.herokuapp.com/api/auth/login", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        password,
-        email,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.error) {
-          M.toast({ html: data.error, classes: "#c62828 red darken-3" });
-        } else {
-          localStorage.setItem("jwt", data.token);
-          localStorage.setItem("user", JSON.stringify(data.user));
-          dispatch({ type: "USER", payload: data.user });
-          M.toast({
-            html: "signedin success",
-            classes: "#43a047 green darken-1",
-          });
-          navigate("/home");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+    try {
+      fetch("https://teamone-ig-clone.herokuapp.com/api/auth/login", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password,
+          email,
+        }),
       });
+      localStorage.setItem("user", email);
+      dispatch({ type: "USER", payload: email });
+      M.toast({
+        html: "signedin success",
+        classes: "#43a047 green darken-1",
+      });
+      navigate("/home");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
