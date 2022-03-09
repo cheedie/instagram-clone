@@ -238,9 +238,10 @@ const Wrapper = styled.main`
       position: relative;
       align-items: center;
       justify-content: center;
-      background-color: rgba(196, 196, 196, 0.5);
+      background-color: rgba(196, 196, 196, 0.2);
       border-radius: 10px;
-      padding: 0.65rem 3rem;
+      padding: 0.85rem 5rem;
+      margin-left: 10rem;
     }
     .search-input svg {
       position: absolute;
@@ -255,7 +256,7 @@ const Wrapper = styled.main`
       font-style: normal;
       letter-spacing: 0.5px;
       color: rgba(0, 0, 0, 0.75);
-      padding-left: 0.5rem;
+      // padding-left: 0.5rem;
     }
     .mobile-links {
       display: none;
@@ -267,6 +268,7 @@ const Wrapper = styled.main`
       padding-right: 3rem;
       cursor: pointer;
     }
+
     .create-modal-content {
       display: block;
       background: #fff;
