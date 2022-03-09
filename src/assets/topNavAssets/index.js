@@ -11,6 +11,7 @@ import { ReactComponent as LikeBtn } from "./active-like.svg";
 import { ReactComponent as CommentBtn } from "./comment.svg";
 import { ReactComponent as ShareBtn } from "./share.svg";
 import { ReactComponent as SaveBtn } from "./save.svg";
+import { ReactComponent as FacebookIcon } from "./facebook-icon.svg";
 
 export {
   HomeIcon,
@@ -26,4 +27,5 @@ export {
   CommentBtn,
   ShareBtn,
   SaveBtn,
+  FacebookIcon,
 };
