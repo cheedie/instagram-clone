@@ -1,145 +1,117 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import M from "materialize-css";
 import styled from "styled-components";
+import { StyledForm } from "../components/Styles/Form.Styled";
+import { StyledButton } from "../components/Styles/Form.Styled";
+import { StyledText } from "../components/Styles/Form.Styled";
+
 import ig from "../assets/topNavAssets/ig.svg";
-import { signUpData } from "../data/signupData";
-import Button from "../components/Button";
+// import { signUpData } from "../data/signupData";
 import { FacebookIcon } from "../assets/topNavAssets";
 
 const Form = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isEmail, setPhoneEmail] = useState(true);
-  // const check = () => {
-  //     if(!isEmail) {
-  //         return "phone"
-  //     }else if(phone.length > 0){
-  //         setPhoneEmail(false);
-  //         return "phone"
-  //     }else{
-  //         return "email"
-  //     }
 
-  // }
-  const check = () => {
-    if (!isEmail) {
-      return "phone";
-    } else if (phone.length > 0) {
-      setPhoneEmail(false);
-      return "phone";
-    } else {
-      return "email";
+  const uploadFields = () => {
+    if (/\S+@\S+\.\S+/.test(email)) {
+      M.toast({ html: "invalid email", classes: "#c62828 red darken-3" });
+      return;
     }
-
-    // !isEmail ? "phone" : phone.length > 0 ? setPhoneEmail(false) : "email";
+    try {
+      fetch("https://teamone-ig-clone.herokuapp.com/api/auth/register", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          username,
+          email,
+          password,
+        }),
+      }).then((res) => navigate("/home"));
+    } catch (err) {
+      console.log(err);
+    }
   };
-  const regex = /^\d/gi;
+
   return (
     <Wrapper>
       <div className="sign-up-container">
         <div
           style={{
             display: "flex",
-
             justifyContent: "center",
           }}
         >
           <img src={ig} alt="instagram logo" className="logo" />
         </div>
-        <button>
+        <button className="facebook">
           <span>
             <FacebookIcon />
           </span>
           <p>Continue with Facebook</p>
         </button>
-        <span className="hr-line">
-          <span className="line"></span>
-          <p>OR</p>
-          <span className="line"></span>
-        </span>
-      </div>
+        <h3 className="line">
+          <span>OR</span>
+        </h3>
 
-      {/* <Logo src={ig} alt="instagram logo" />
-      <Button title="Continue with facebook" dark />
-      <FormWrapper>
-        <legend>
-          <InputWrapper>
-            <Label
-              className={phone | email ? "active" : ""}
-              htmlFor={check || "phone"}
-            >
-              Phone number or email address
-            </Label>
-            <Input
-              name={check || "phone"}
-              type="text"
+        <div>
+          <StyledForm>
+            <input
+              type="email"
+              name="email"
+              placeholder="Phone number or email address"
+              onChange={(e) => setEmail(e.target.value)}
               value={email}
-              onChange={(e) =>
-                regex.test(e)
-                  ? setPhone(e.target.value)
-                  : setEmail(e.target.value)
-              }
             />
-          </InputWrapper>
 
-          <InputWrapper>
-            <Label className={name ? "active" : ""} htmlFor="name">
-              {" "}
-              Fullname{" "}
-            </Label>
-            <Input
+            <input
               name="name"
               type="text"
+              placeholder="Full name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-          </InputWrapper>
 
-          <InputWrapper>
-            <Label className={username ? "active" : ""} htmlFor="username">
-              {" "}
-              Username{" "}
-            </Label>
-            <Input
+            <input
               name="username"
               type="text"
+              placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-          </InputWrapper>
 
-          <InputWrapper>
-            <Label className={password ? "active" : ""} htmlFor="password">
-              {" "}
-              Password{" "}
-            </Label>
-            <Input
+            <input
               name="password"
               type="password"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-          </InputWrapper>
-        </legend>
-      </FormWrapper>
-      <Button title="Sign up" dark={password.length > 5 ? true : false} />
-      <TextWrapper>
-        <Text>
-          By clicking on Sign up, you are agreeing to the <br />
-          <Link to="/">Terms of Service</Link> and
-          <Link to="/"> Privacy Policy</Link>
-        </Text>
-      </TextWrapper>
-      <TextWrapper>
-        <Text>
+          </StyledForm>
+
+          <StyledButton value="Submit" onClick={() => uploadFields()}>
+            Sign up
+          </StyledButton>
+
+          <StyledText>
+            By clicking on Sign up, you are agreeing to the <br />{" "}
+            <span>Terms of Service </span>
+            and <span>Privacy Policy </span>
+          </StyledText>
+        </div>
+
+        <StyledText>
           Have an account?
-          <Link to="/signin"> Sign in </Link>
-        </Text>
-      </TextWrapper> */}
+          <Link to="/login">Sign in.</Link>
+        </StyledText>
+      </div>
     </Wrapper>
   );
 };
@@ -150,20 +122,19 @@ const Wrapper = styled.div`
   display: flex;
   background: #ffffff;
   border: none;
-  
+
   .logo {
-      width: 15rem;
-      
+    width: 15rem;
   }
   .sign-up-container {
     width: 90vw;
-    margin: 5rem auto;
+    margin: 1.5rem auto 1rem auto;
     text-align: center;
     display: flex;
     flex-direction: column;
     gap: 0.85rem;
   }
-  .sign-up-container button {
+  .facebook {
     background: #1a83f3;
     border-radius: 3px;
     color: #fff;
@@ -175,14 +146,20 @@ const Wrapper = styled.div`
     padding: 0.85rem 0;
     cursor: pointer;
   }
-  .hr-line {
-    display: grid;
-    gap: 1rem;
-  }
   .line {
-    width: 20rem;
-    height: 10rem
-    border-bottom: 1px solid #0000;
+padding: 0 3em;
+    text-align: center;
+    border-bottom: 1px solid #2e2a2a49;
+    line-height: 0.1em;
+    margin: 15px 0 15px;
+    font-size: 15px;
+  }
+.line span {
+    background: #fff;
+    padding: 0 10px;
+    // max-width: 750px;
+  }
+
   }
 
   @media (min-width: 800px) {
@@ -190,96 +167,8 @@ const Wrapper = styled.div`
     width: 30vw;
     margin: 5rem auto 0 auto;
     border: 1.5px solid rgba(0, 0, 0, 0.3);
+    padding: 0 1rem;
   }
 `;
 
-const FormWrapper = styled.form`
-  display: grid;
-  grid-template-columns: 328px;
-  justify-content: center;
-  align-items: center;
-
-  & legend {
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-
-    input:focus & label {
-      transform: translateY(-100%) scale(0.75);
-    }
-  }
-`;
-const InputWrapper = styled.div`
-  width: 328px;
-  height: 50px;
-  position: relative;
-`;
-const Label = styled.label`
-  /* cursor: pointer; */
-  position: absolute;
-  display: block;
-  top: 50%;
-  left: 8px;
-  transform: translateY(-50%);
-  color: #505050;
-  transition: 0.2s;
-
-  &.active {
-    transform: translateY(-100%) scale(0.75);
-  }
-`;
-
-const Input = styled.input`
-  display: block;
-  width: 328px;
-  height: 50px;
-  border: 0.5px solid #5b5b5b;
-  box-sizing: border-box;
-  border-radius: 3px;
-  position: relative;
-  padding: 8px;
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 24px;
-  color: #505050;
-  background: transparent;
-
-  &:focus {
-    color: black;
-    background: #eeeeee;
-  }
-`;
-const Logo = styled.img`
-  width: 220px;
-  height: 74px;
-  margin: 30px 0px;
-`;
-
-const TextWrapper = styled.div`
-  width: 277px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Text = styled.p`
-  width: 277px;
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 18px;
-  letter-spacing: -0.078px;
-  text-align: center;
-  color: rgba(60, 60, 67, 0.6);
-
-  a {
-    color: black;
-    font-weight: bold;
-  }
-`;
 export default Form;
