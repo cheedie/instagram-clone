@@ -22,16 +22,13 @@ const HomePage = () => {
           <div className="display profile-container">
             <div className="display" style={{ gap: "1rem" }}>
               <img src={ProfilePic} alt="" className="profile-pic" />
-              <span>
-                <h6>john williams</h6>
-                <p>canada</p>
-              </span>
+              <h2 className="name">john williams</h2>
             </div>
             <span className="line">
               <Line />
             </span>
           </div>
-          <img src={Post} alt="" />
+          <img src={Post} alt="" className="post" />
           <div className="display" style={{ padding: "0.85rem 1rem" }}>
             <span className="btn-container">
               <button>
@@ -52,8 +49,10 @@ const HomePage = () => {
           </div>
           <span style={{ padding: "0 1rem" }}>1 Like</span>
           <div className="caption">
-            <p>john williams</p>
-            <p>interior deco by yours truly</p>
+            <h2 className="name">john williams</h2>
+            <p style={{ fontSize: "1.5rem", fontWeight: "light" }}>
+              interior deco by yours truly
+            </p>
           </div>
           <div className="profile-bottom">
             <img src={ProfilePic} alt="" className="profile-pic" />
@@ -123,19 +122,31 @@ const Wrapper = styled.section`
     align-item: center;
     padding: 0 1rem;
   }
+  .name {
+    color: #000000;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
   @media (min-width: 800px) {
     flex-direction: row;
     background: #e5e5e5;
-    height: 1000px;
+
     .home-page-container {
-      flex: 70vw;
-      background: #e5e5e5;
-      border: 1px solid blue;
+      width: 50vw;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+      margin-left: 15rem;
+      margin-top: 3rem;
     }
     .side-bar {
       display: block;
-      flex: 30vw;
+      width: 50vw;
       border: 1px solid red;
+    }
+    .post {
+      height: 50rem;
+      object-fit: cover;
     }
   }
 `;
