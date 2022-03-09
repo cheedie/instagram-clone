@@ -15,11 +15,14 @@ const Routing = () => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
-      dispatch({ type: "USER", payload: user });
-    } else {
-      navigate("/login");
-    }
+
+    setTimeout(() => {
+      if (user) {
+        dispatch({ type: "USER", payload: user });
+      } else {
+        navigate("/signup");
+      }
+    }, 3000);
   }, []);
   return (
     <Routes>
