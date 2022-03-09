@@ -17,17 +17,17 @@ import img3 from "../assets/downloadios.svg";
 import img2 from "../assets/downloadgoogle.svg";
 
 const Login = () => {
-  const { state, dispatch } = useContext(UserContext);
+  const {
+    // state,
+
+    dispatch,
+  } = useContext(UserContext);
   const navigate = useNavigate();
   const [password, setPasword] = useState("");
   const [email, setEmail] = useState("");
 
   const userLogin = () => {
-    if (
-      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-        email
-      )
-    ) {
+    if (/\S+@\S+\.\S+/.test(email)) {
       M.toast({ html: "invalid email", classes: "#c62828 red darken-3" });
       return;
     }

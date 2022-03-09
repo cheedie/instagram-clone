@@ -11,18 +11,25 @@ export const UserContext = createContext();
 
 const Routing = () => {
   const navigate = useNavigate();
-  const { state, dispatch } = useContext(UserContext);
+  const {
+    // state,
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    setTimeout(() => {
-      if (user) {
-        dispatch({ type: "USER", payload: user });
-      } else {
-        navigate("/signup");
-      }
-    }, 3000);
-  }, []);
+    dispatch,
+  } = useContext(UserContext);
+
+  useEffect(
+    () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      setTimeout(() => {
+        if (user) {
+          dispatch({ type: "USER", payload: user });
+        } else {
+          navigate("/signup");
+        }
+      }, 3000);
+    }
+    // []
+  );
   return (
     <Routes>
       <Route path="/" exact={true} element={<SplashScreen />}></Route>

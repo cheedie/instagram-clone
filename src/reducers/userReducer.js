@@ -1,7 +1,7 @@
 export const initialState = null;
 
 export const reducer = (state, action) => {
-  if (action.type == "USER") {
+  if (action.type === "USER") {
     return action.payload;
   }
   if (action.type === "CLEAR") {
@@ -14,7 +14,7 @@ export const reducer = (state, action) => {
       following: action.payload.following,
     };
   }
-  if (action.type == "UPDATEPIC") {
+  if (action.type === "UPDATEPIC") {
     return {
       ...state,
       pic: action.payload,
