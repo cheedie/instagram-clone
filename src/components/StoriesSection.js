@@ -3,8 +3,8 @@ import { useRef, useEffect, useState } from 'react';
 import Stories from "./Stories/Stories";
 import { motion } from 'framer-motion';
 import styled from "styled-components";
-import { storiesObjOne, storiesObjTwo, storiesObjThree, storiesObjFour, storiesObjFive,
-  storiesObjSix, storiesObjSeven, storiesObjEight, storiesObjNine, storiesObjTen } from './Stories/StoriesData'
+import { storiesObjOne, storiesObjTwo, storiesObjThree, storiesObjFour, storiesObjFive, storiesObjEleven,
+  storiesObjSix, storiesObjSeven, storiesObjEight, storiesObjNine, storiesObjTen, storiesObjTwelve, } from './Stories/StoriesData'
 
 
 const StoriesSection = () => {
@@ -50,6 +50,12 @@ const StoriesSection = () => {
                 </motion.div>
                 <motion.div>
                     <Stories {...storiesObjTen} />
+                </motion.div>
+                <motion.div>
+                    <Stories {...storiesObjEleven} />
+                </motion.div>
+                <motion.div>
+                    <Stories {...storiesObjTwelve} />
                 </motion.div>
             </motion.div>       
         </StyledStories>

@@ -47,3 +47,13 @@ export const storiesObjTen = {
     storyImg: 'storiesAssets/Storyimg9.svg',
     title: '2207byme',
 };
+
+export const storiesObjEleven = {
+    storyImg: 'storiesAssets/Storyimg3.svg',
+    title: 'Maryna',
+};
+
+export const storiesObjTwelve = {
+    storyImg: 'storiesAssets/Storyimg7.svg',
+    title: 'ransomjnr',
+};
