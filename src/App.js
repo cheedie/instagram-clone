@@ -5,8 +5,6 @@ import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
 import SplashScreen from "./pages/SplashScreen";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-
 function App() {
   return (
     <BrowserRouter>
