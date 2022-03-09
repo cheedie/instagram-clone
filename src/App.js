@@ -15,7 +15,6 @@ const Routing = () => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
-
     setTimeout(() => {
       if (user) {
         dispatch({ type: "USER", payload: user });
