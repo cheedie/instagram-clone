@@ -1,10 +1,10 @@
 import React from "react";
-import { FaFacebook } from 'react-icons/fa';
+import { FaFacebook } from "react-icons/fa";
 
 const Login = () => {
   return (
-    <> 
-        <GlobalStyle />
+    <>
+      {/* <GlobalStyle />
         <StyledFormWrapper>
             <StyledForm>
                 <img src="../assets/Login_Logo.svg" alt="Instagram logo" />
@@ -19,10 +19,9 @@ const Login = () => {
                 <StyledButton>Continue with Facebook</StyledButton>
                 <StyledText>Dont have an account?  Sign up.</StyledText>
             </StyledForm>
-        </StyledFormWrapper>
+        </StyledFormWrapper> */}
     </>
-  )
-}
-
+  );
+};
 
 export default Login;

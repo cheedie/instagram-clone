@@ -17,8 +17,9 @@ ul {
   padding: 0;
 }
 
-/* main {
-} */
+main {
+  display: flex;
+}
 
 /* 
 =============
