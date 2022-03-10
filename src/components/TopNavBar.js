@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { GrGrid } from "react-icons/gr";
 import styled from "styled-components";
 import ig from "../assets/topNavAssets/ig.svg";
 import { AiOutlineClose } from "react-icons/ai";
+import Grid from "../assets/grid-icon.png";
+import Live from "../assets/live.png";
+import Reel from "../assets/reel.png";
+import Story from "../assets/add-icon.png";
 
 // import CreatePost from "../components/CreatePost";
 import {
@@ -33,23 +36,24 @@ const TopNavBar = () => {
           {isAddOpen && (
             <div className="modal-overlay">
               <div className="modal-content">
-                <div className="modal-box" onClick={(e) => setCreatePost(true)}>
+                <div
+                  className="modal-box"
+                  onClick={(e) => setCreatePost(!createPost)}
+                >
                   <p>Post</p>
-                  <GrGrid />
+                  <img src={Grid} alt="" style={{ color: "red" }} />
                 </div>
                 <div className="modal-box">
                   <p>Story</p>
-
-                  <GrGrid />
+                  <img src={Story} alt="" />
                 </div>
                 <div className="modal-box">
                   <p>Reel</p>
-
-                  <GrGrid />
+                  <img src={Reel} alt="" />
                 </div>
                 <div className="no-border">
                   <p>Live</p>
-                  <GrGrid />
+                  <img src={Live} alt="" />
                 </div>
               </div>
             </div>
@@ -122,7 +126,7 @@ const TopNavBar = () => {
               <h1 style={{ color: "rgba(0, 0, 0, 0.5)" }}>
                 Drag photos and videos here
               </h1>
-              <button className="select-btn">Select from computer</button>
+              <button className="select-btn">Select image</button>
             </div>
           </div>
         </div>
@@ -183,6 +187,7 @@ const Wrapper = styled.main`
     left: auto;
     width: 8rem;
     padding-top: 3.5rem;
+    z-index: 5;
   }
   .modal-content {
     background: #252424;
