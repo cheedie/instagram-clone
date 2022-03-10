@@ -34,7 +34,7 @@ const Form = () => {
           email,
           password,
         }),
-      }).then((res) => navigate("/home"));
+      }).then((res) => navigate("/login"));
     } catch (err) {
       console.log(err);
     }

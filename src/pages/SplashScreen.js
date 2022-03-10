@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../assets/ig-logo-png.png";
+import { Link } from "react-router-dom";
 
 const SplashScreen = () => {
   return (
     <Wrapper>
       <LogoWrapper>
-        <Logo src={logo} alt="Instagram Logo" />
+        <Link to="/signup">
+          <Logo src={logo} alt="Instagram Logo" />
+        </Link>
       </LogoWrapper>
     </Wrapper>
   );
