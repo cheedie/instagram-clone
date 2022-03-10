@@ -1,4 +1,7 @@
-import React from "react";
+import React from // , { useEffect, useState }
+
+"react";
+// import { Image } from "cloudinary-react";
 import BottomNavBar from "../components/BottomNavbar";
 import TopNavBar from "../components/TopNavBar";
 import styled from "styled-components";
@@ -14,13 +17,44 @@ import {
   SaveBtn,
 } from "../assets/topNavAssets";
 import Post from "../assets/post.png";
+import Post2 from "../assets/image-2.png";
 const HomePage = () => {
+  // const [imageIds, setImageIds] = useState([]);
+
+  // const loadImages = async () => {
+  //   try {
+  //     const res = await fetch(
+  //       "https://teamone-ig-clone.herokuapp.com/api/posts"
+  //     );
+  //     const data = await res.json();
+  //     setImageIds(data);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+  // useEffect(() => {
+  //   loadImages();
+  // }, []);
+
   return (
     <>
       <TopNavBar />
       <StoriesSection />
       <Wrapper>
         <div className="home-page-container">
+          {/* <div>
+            {imageIds &&
+              imageIds.map((imageId, index) => (
+                <Image
+                  key={index}
+                  cloudName={process.env.REACT_APP_CLOUDINARY_NAME}
+                  publicId={imageId}
+                  width="300"
+                  crop="scale"
+                />
+              ))}
+          </div> */}
+
           {/* card */}
           <div className="display profile-container">
             <div className="display" style={{ gap: "1rem" }}>
@@ -65,7 +99,91 @@ const HomePage = () => {
               className="comment-input"
             />
           </div>
+
+          <div className="display profile-container">
+            <div className="display" style={{ gap: "1rem" }}>
+              <img src={ProfilePic} alt="" className="profile-pic" />
+              <h2 className="name">john williams</h2>
+            </div>
+            <span className="line">
+              <Line />
+            </span>
+          </div>
+          <img src={Post2} alt="" className="post" />
+          <div className="display" style={{ padding: "0.85rem 1rem" }}>
+            <span className="btn-container">
+              <button>
+                <LikeBtn />
+              </button>
+              <button>
+                <CommentBtn />
+              </button>
+              <button>
+                <ShareBtn />
+              </button>
+            </span>
+            <span>
+              <button>
+                <SaveBtn />
+              </button>
+            </span>
+          </div>
+          <span style={{ padding: "0 1rem" }}>1 Like</span>
+          <div className="caption">
+            <h2 className="name">jane doe</h2>
+            <p style={{ fontSize: "1.2rem", fontWeight: "light" }}>self love</p>
+          </div>
+          <div className="profile-bottom">
+            <img src={ProfilePic} alt="" className="profile-pic" />
+            <input
+              type="text"
+              placeholder="Add comment....."
+              className="comment-input"
+            />
+          </div>
+          <div className="display profile-container">
+            <div className="display" style={{ gap: "1rem" }}>
+              <img src={ProfilePic} alt="" className="profile-pic" />
+              <h2 className="name">john williams</h2>
+            </div>
+            <span className="line">
+              <Line />
+            </span>
+          </div>
+          <img src={Post} alt="" className="post" />
+          <div className="display" style={{ padding: "0.85rem 1rem" }}>
+            <span className="btn-container">
+              <button>
+                <LikeBtn />
+              </button>
+              <button>
+                <CommentBtn />
+              </button>
+              <button>
+                <ShareBtn />
+              </button>
+            </span>
+            <span>
+              <button>
+                <SaveBtn />
+              </button>
+            </span>
+          </div>
+          <span style={{ padding: "0 1rem" }}>1 Like</span>
+          <div className="caption">
+            <h2 className="name">anna hanna</h2>
+            <p style={{ fontSize: "1.2rem", fontWeight: "light" }}>loving it</p>
+          </div>
+          <div className="profile-bottom">
+            <img src={ProfilePic} alt="" className="profile-pic" />
+            <input
+              type="text"
+              placeholder="Add comment....."
+              className="comment-input"
+            />
+          </div>
         </div>
+
         <div className="side-bar"></div>
       </Wrapper>
       <BottomNavBar />

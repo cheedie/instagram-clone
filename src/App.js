@@ -5,7 +5,8 @@ import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
-import SplashScreen from "./pages/SplashScreen";
+// import SplashScreen from "./pages/SplashScreen";
+import CreatePost from "./pages/CreatePost";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 export const UserContext = createContext();
 
@@ -34,11 +35,12 @@ const Routing = () => {
   }, []);
   return (
     <Routes>
-      <Route path="/" exact={true} element={<SplashScreen />}></Route>
+      {/* <Route path="/" exact={true} element={<SplashScreen />}></Route> */}
       <Route path="/login" element={<Login />}></Route>
       <Route path="/signup" element={<SignUp />}></Route>
       <Route path="/home" element={<HomePage />}></Route>
       <Route path="/profile" element={<Profile />}></Route>
+      <Route path="/createpost" element={<CreatePost />}></Route>
     </Routes>
   );
 };

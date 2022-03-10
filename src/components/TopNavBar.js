@@ -34,15 +34,12 @@ const TopNavBar = () => {
             <AddPostIcon />
           </li>
           {isAddOpen && (
-            <div className="modal-overlay">
+            <div onClick={() => setIsAddOpen(false)} className="modal-overlay">
               <div className="modal-content">
-                <div
-                  className="modal-box"
-                  onClick={(e) => setCreatePost(!createPost)}
-                >
+                <Link to="/createpost" className="modal-box">
                   <p>Post</p>
                   <img src={Grid} alt="" style={{ color: "red" }} />
-                </div>
+                </Link>
                 <div className="modal-box">
                   <p>Story</p>
                   <img src={Story} alt="" />

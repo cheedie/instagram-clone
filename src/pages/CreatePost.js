@@ -1,62 +1,66 @@
-import React, { useState, useEffect } from "react";
-import M from "materialize-css";
+import React, { useState } from "react";
+import Alert from "../components/Alert";
+// import M from "materialize-css";
 import { useNavigate } from "react-router-dom";
 const CreatePost = () => {
   const navigate = useNavigate();
 
   const [caption, setCaption] = useState("");
-  const [body, setBody] = useState("");
-  const [image, setImage] = useState("");
-  const [url, setUrl] = useState("");
+  const [fileInputState, setFileInputState] = useState("");
+  const [previewSource, setPreviewSource] = useState("");
+  const [selectedFile, setSelectedFile] = useState();
+  const [successMsg, setSuccessMsg] = useState("");
+  const [errMsg, setErrMsg] = useState("");
 
-  useEffect(() => {
-    if (url) {
-      fetch("https://teamone-ig-clone.herokuapp.com/api/posts", {
-        method: "post",
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+    setSelectedFile(file);
+    setFileInputState(e.target.value);
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
+  const handleSubmitFile = (e) => {
+    e.preventDefault();
+    if (!selectedFile) return;
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    reader.onloadend = () => {
+      uploadImage(reader.result);
+      console.log("yay");
+      console.log("yay 3");
+    };
+    reader.onerror = () => {
+      console.error("AHHHHHHHH!!");
+      setErrMsg("something went wrong!");
+    };
+    navigate("/home");
+  };
+
+  const uploadImage = async (base64EncodedImage) => {
+    try {
+      await fetch("https://teamone-ig-clone.herokuapp.com/api/posts", {
+        method: "POST",
+        body: JSON.stringify({ data: base64EncodedImage }),
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("jwt"),
         },
-        body: JSON.stringify({
-          caption: "",
-          location: "",
-          fileStr: "",
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.error) {
-            M.toast({ html: data.error, classes: "#c62828 red darken-3" });
-          } else {
-            M.toast({
-              html: "Created post Successfully",
-              classes: "#43a047 green darken-1",
-            });
-            navigate("/home");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [url]);
-
-  const postDetails = () => {
-    const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", "new-insta");
-    data.append("cloud_name", "cnq");
-    fetch("https://api.cloudinary.com/v1_1/cnq/image/upload", {
-      method: "post",
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setUrl(data.url);
-      })
-      .catch((err) => {
-        console.log(err);
       });
+      setFileInputState("");
+      setPreviewSource("");
+      setCaption("");
+      setSuccessMsg("Image uploaded successfully");
+    } catch (err) {
+      console.error(err);
+      setErrMsg("Something went wrong!");
+    }
   };
 
   return (
@@ -69,33 +73,38 @@ const CreatePost = () => {
         textAlign: "center",
       }}
     >
-      <input
-        type="text"
-        placeholder="caption"
-        value={title}
-        onChange={(e) => setCaption(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="body"
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
-      />
-      <div className="file-field input-field">
-        <div className="btn #64b5f6 blue darken-1">
-          <span>Uplaod Image</span>
-          <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-        </div>
-        <div className="file-path-wrapper">
-          <input className="file-path validate" type="text" />
-        </div>
-      </div>
-      <button
-        className="btn waves-effect waves-light #64b5f6 blue darken-1"
-        onClick={() => postDetails()}
-      >
-        Submit post
-      </button>
+      <form action="">
+        <span>Upload Image</span>
+        <Alert msg={errMsg} type="danger" />
+        <Alert msg={successMsg} type="success" />
+
+        <input
+          id="fileInput"
+          type="file"
+          name="image"
+          onChange={handleFileInputChange}
+          value={fileInputState}
+          className="form-input"
+        />
+        <input
+          type="text"
+          placeholder="caption"
+          value={caption}
+          onChange={(e) => setCaption(e.target.value)}
+        />
+
+        <button
+          onClick={handleSubmitFile}
+          className="btn waves-effect waves-light #64b5f6 blue darken-1"
+          type="submit"
+        >
+          Post
+        </button>
+      </form>
+
+      {previewSource && (
+        <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
+      )}
     </div>
   );
 };
